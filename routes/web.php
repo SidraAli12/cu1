@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetpasswordController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,7 +32,7 @@ Route::get('/', function () {
 
 
 // Auth routes
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
 
 Route::get('/login', [loginController::class, 'showLoginForm'])->name('login');
@@ -40,4 +42,5 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('auth');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');

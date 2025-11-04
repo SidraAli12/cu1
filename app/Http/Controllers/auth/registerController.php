@@ -11,7 +11,8 @@ class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('auth.register'); }
+        return view('auth.register');
+    }
 
     public function register(Request $request)
     {
@@ -21,12 +22,15 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
+        // Log the user in after registration
+        auth()->login($user);
+
+        return redirect()->route('dashboard')->with('success', 'Registration successful!');
     }
 }

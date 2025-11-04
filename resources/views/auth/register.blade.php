@@ -21,7 +21,7 @@
         {{-- LEFT SIDE (Form) --}}
         <div class="flex justify-center items-center p-8 lg:p-10 order-2 lg:order-1">
             <div class="kt-card max-w-[370px] w-full">
-                <form action="{{ route('register') }}" method="POST" class="kt-card-content flex flex-col gap-5 p-10">
+                <form action="{{ route('register.post') }}" method="POST" class="kt-card-content flex flex-col gap-5 p-10">
                     @csrf
 
                     <div class="text-center mb-2.5">
