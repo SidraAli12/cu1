@@ -20,11 +20,18 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('dashboard');
+        if (auth()->attempt($request->only('email', 'password'), $request->filled('remember'))) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Login successful!',
+                'redirect' => route('dashboard'),
+            ]);
         }
 
-        return back()->with('error', 'Invalid credentials. Please try again.');
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Invalid email or password.',
+        ]);
     }
 
     public function logout(Request $request)
