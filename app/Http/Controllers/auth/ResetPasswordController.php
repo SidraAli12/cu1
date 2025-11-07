@@ -10,35 +10,37 @@ use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
+    // Show reset password form
     public function showResetForm()
     {
         return view('auth.resetpassword');
     }
 
-   public function reset(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email|exists:users,email',
-        'password' => 'required|confirmed|min:6',
-    ]);
+    // Handle password reset submission
+    public function reset(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|confirmed|min:6',
+        ]);
 
-    $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-    if (!$user) {
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No user found with this email address.'
+            ]);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->setRememberToken(Str::random(60));
+        $user->save();
+
         return response()->json([
-            'status' => 'error',
-            'message' => 'No user found with this email address.',
-        ], 404);
+            'status' => 'success',
+            'message' => 'Password successfully reset! Redirecting to login...',
+            'redirect' => route('login'),
+        ]);
     }
-
-    $user->password = Hash::make($request->password);
-    $user->setRememberToken(Str::random(60));
-    $user->save();
-
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Password has been reset successfully!',
-        'redirect' => route('login'),
-    ]);
-}
 }
