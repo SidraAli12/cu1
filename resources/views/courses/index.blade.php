@@ -5,7 +5,6 @@
     <div class="card p-6 rounded-2xl shadow">
         <h2 class="text-xl font-bold mb-4">Course Management</h2>
 
-        {{-- Add Course Form --}}
         <form id="addCourseForm" class="mb-6">
             @csrf
             <div class="grid grid-cols-3 gap-4">
@@ -15,7 +14,6 @@
             </div>
         </form>
 
-        {{-- Course List --}}
         <table class="min-w-full text-left border">
             <thead>
                 <tr class="bg-gray-100">
