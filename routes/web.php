@@ -35,10 +35,9 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 
 
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
     Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
     Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
     Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 });
-
