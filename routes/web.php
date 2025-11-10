@@ -4,30 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetpasswordController;
+use App\Http\Controllers\CourseController;
+
 
 
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-
-// // Admin-only route
-// Route::get('/admin/dashboard', function () {
-//     return 'Welcome Admin!';
-// })->middleware('role:admin');
-
-// // Teacher-only route
-// Route::get('/teacher/dashboard', function () {
-//     return 'Welcome Teacher!';
-// })->middleware('role:teacher');
-
-// // Student-only route
-// Route::get('/student/dashboard', function () {
-//     return 'Welcome Student!';
-// })->middleware('role:student');
 
 
 
@@ -49,4 +32,13 @@ Route::get('/dashboard', function () {
 
 Route::get('/reset-password', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
+Route::middleware('auth')->group(function() {
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+    Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+});
 
