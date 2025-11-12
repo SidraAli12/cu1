@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetpasswordController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\TopicController;
+
 
 
 
@@ -41,3 +43,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
     Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 });
+
+
+Route::get('/courses/topics', [TopicController::class, 'index'])->name('topics.index');
+    Route::post('/courses/topics', [TopicController::class, 'store'])->name('topics.store');
+    Route::put('/courses/topics/{id}', [TopicController::class, 'update'])->name('topics.update');
+    Route::delete('/courses/topics/{id}', [TopicController::class, 'destroy'])->name('topics.destroy');
