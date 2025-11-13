@@ -20,4 +20,9 @@ class Topic extends Model
     {
         return $this->belongsTo(Courses::class, 'course_id');
     }
+    public function chapters()
+{
+    return $this->hasMany(Chapter::class, 'topic_id');
+}
+
 }

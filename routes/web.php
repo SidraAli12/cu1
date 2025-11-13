@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetpasswordController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TopicController;
+    use App\Http\Controllers\ChapterController;
+
 
 
 
@@ -49,3 +51,11 @@ Route::get('/courses/topics', [TopicController::class, 'index'])->name('topics.i
     Route::post('/courses/topics', [TopicController::class, 'store'])->name('topics.store');
     Route::put('/courses/topics/{id}', [TopicController::class, 'update'])->name('topics.update');
     Route::delete('/courses/topics/{id}', [TopicController::class, 'destroy'])->name('topics.destroy');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');
+    Route::post('/chapters', [ChapterController::class, 'store'])->name('chapters.store');
+    Route::put('/chapters/{id}', [ChapterController::class, 'update'])->name('chapters.update');
+    Route::delete('/chapters/{id}', [ChapterController::class, 'destroy'])->name('chapters.destroy');
+});
