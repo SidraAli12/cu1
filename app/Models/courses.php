@@ -11,9 +11,7 @@ class Courses extends Model
 
    
     protected $fillable = [
-        'subject_id',
-        'track_id',
-        'courses', 
+       'subject_id', 'track_id', 'course', 
     ];
 
     

@@ -9,52 +9,41 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Courses::all();
+        $courses = Courses::all(); 
         return view('courses.index', compact('courses'));
     }
 
-   public function store(Request $request)
-{
-    $request->validate([
-        'subject_id' => 'required|integer',
-        'track_id' => 'required|integer',
-        'course' => 'required|string|max:255',
-    ]);
+    // Store new course
+    public function store(Request $request)
+    {
+        $request->validate([
+            'subject_id' => 'required|integer',
+            'track_id' => 'required|integer',
+            'course' => 'required|string|max:255',
+        ]);
 
-    $course = Courses::create($request->only(['subject_id','track_id','course']));
+        $course = Courses::create($request->only('subject_id','track_id','course',));
 
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Course added successfully!',
-        'data' => $course
-    ]);
-}
+        return response()->json(['message' => 'Course added successfully', 'course' => $course]);
+    }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'subject_id' => 'required|integer',
-        'track_id' => 'required|integer',
-        'course' => 'required|string|max:255',
-    ]);
+    public function update(Request $request, Courses $course)
+    {
+        $request->validate([
+            'subject_id' => 'required|integer',
+            'track_id' => 'required|integer',
+            'course' => 'required|string|max:255',
+        ]);
 
-    $course = Courses::findOrFail($id);
-    $course->update($request->only(['subject_id','track_id','course']));
+        $course->update($request->only('subject_id','track_id','course',));
 
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Course updated successfully!',
-        'data' => $course
-    ]);
-}
+        return response()->json(['message' => 'Course updated successfully', 'course' => $course]);
+    }
 
-public function destroy($id)
-{
-    Courses::findOrFail($id)->delete();
-
-    return response()->json([
-        'status' => 'success',
-        'message' => 'Course deleted successfully!'
-    ]);
-}
+    // Delete course
+    public function destroy(Courses $course)
+    {
+        $course->delete();
+        return response()->json(['message' => 'Course deleted successfully']);
+    }
 }

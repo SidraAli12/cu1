@@ -39,12 +39,12 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name(
 
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
-    Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
-    Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
-});
+// Course Management (AJAX)
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
+Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
 
 
 Route::get('/courses/topics', [TopicController::class, 'index'])->name('topics.index');
@@ -59,3 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/chapters/{id}', [ChapterController::class, 'update'])->name('chapters.update');
     Route::delete('/chapters/{id}', [ChapterController::class, 'destroy'])->name('chapters.destroy');
 });
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
+Route::post('/courses', [CourseController::class, 'store'])->name('courses.store');
+Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
+Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
