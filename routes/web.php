@@ -6,7 +6,10 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetpasswordController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TopicController;
-    use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizAttemptController;
+
 
 
 
@@ -65,3 +68,14 @@ Route::post('/courses', [CourseController::class, 'store'])->name('courses.store
 Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
 Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
 Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
+
+
+//    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+   Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
+Route::post('/quizzes/store', [QuizController::class, 'store'])->name('quizzes.store');
+Route::post('/quizzes/update/{id}', [QuizController::class, 'update'])->name('quizzes.update');
+Route::get('/quizzes/delete/{id}', [QuizController::class, 'destroy'])->name('quizzes.delete');
+
+
+//

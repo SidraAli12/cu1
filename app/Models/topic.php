@@ -24,5 +24,9 @@ class Topic extends Model
 {
     return $this->hasMany(Chapter::class, 'topic_id');
 }
+public function quizzes()
+{
+    return $this->hasMany(Quiz::class, 'topic_id');
+}
 
 }
