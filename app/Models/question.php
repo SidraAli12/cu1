@@ -5,26 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuizAttempt extends Model
+class Question extends Model
 {
     use HasFactory;
 
+    // if your table name is not 'questions', set protected $table = 'your_table_name';
+
     protected $fillable = [
         'quiz_id',
-        'user_id',
-        'started_at',
-        'finished_at',
-        'total_score',
-        'status'
+        'question',
+        'path',         // optional (for media)
+        'marks',
+        'complexity',
+        'question_type' // e.g. 'mcq'|'text'
     ];
 
     public function quiz()
     {
         return $this->belongsTo(Quiz::class, 'quiz_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
     }
 }

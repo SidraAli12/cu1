@@ -11,19 +11,15 @@ class QuizController extends Controller
     public function index()
     {
         $quizzes = Quiz::with('topic')->get();
-        $topics = Topic::all();
-
-        return view('quizzes.index', compact('quizzes', 'topics'));
+        return view('quizzes.index', compact('quizzes'));
     }
 
-    
     public function create()
     {
         $topics = Topic::all();
         return view('quizzes.create', compact('topics'));
     }
 
-    
     public function store(Request $request)
     {
         $request->validate([
@@ -33,18 +29,16 @@ class QuizController extends Controller
             'total_marks' => 'required|integer'
         ]);
 
-        Quiz::create($request->all());
+        Quiz::create($request->only(['topic_id','name','duration_minutes','total_marks']));
 
-        return redirect()->route('quizzes.index')->with('success', 'Quiz created successfully!');
+        return redirect()->route('quizzes.index')->with('success','Quiz created');
     }
 
-    
     public function edit($id)
     {
         $quiz = Quiz::findOrFail($id);
         $topics = Topic::all();
-
-        return view('quizzes.edit', compact('quiz', 'topics'));
+        return view('quizzes.edit', compact('quiz','topics'));
     }
 
     public function update(Request $request, $id)
@@ -58,16 +52,14 @@ class QuizController extends Controller
             'total_marks' => 'required|integer'
         ]);
 
-        $quiz->update($request->all());
+        $quiz->update($request->only(['topic_id','name','duration_minutes','total_marks']));
 
-        return redirect()->route('quizzes.index')->with('success', 'Quiz updated!');
+        return redirect()->route('quizzes.index')->with('success','Quiz updated');
     }
 
-    
     public function destroy($id)
     {
         Quiz::findOrFail($id)->delete();
-
-        return redirect()->route('quizzes.index')->with('success', 'Quiz deleted!');
+        return redirect()->route('quizzes.index')->with('success','Quiz deleted');
     }
 }

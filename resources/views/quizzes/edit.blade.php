@@ -1,40 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card p-5">
-    <h3 class="mb-4">Edit Quiz</h3>
+<div class="card card-flush p-10">
+    <div class="card-header">
+        <h3 class="card-title">Edit Quiz</h3>
+    </div>
 
-    <form action="{{ route('quizzes.update', $quiz->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <div class="card-body py-5">
 
-        <div class="mb-3">
-            <label class="form-label">Select Topic</label>
-            <select name="topic_id" class="form-control">
-                @foreach ($topics as $t)
-                    <option value="{{ $t->id }}" {{ $quiz->topic_id == $t->id ? 'selected' : '' }}>
-                        {{ $t->topic }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        <form action="{{ route('quizzes.update', $quiz->id) }}" method="POST" class="w-75 mx-auto">
+            @csrf
+            @method('PUT')
 
-        <div class="mb-3">
-            <label class="form-label">Quiz Name</label>
-            <input type="text" name="name" value="{{ $quiz->name }}" class="form-control">
-        </div>
+            <div class="mb-8">
+                <label class="form-label fw-bold">Select Topic</label>
+                <select name="topic_id" class="form-control form-control-solid">
+                    @foreach ($topics as $t)
+                        <option value="{{ $t->id }}" {{ $quiz->topic_id == $t->id ? 'selected' : '' }}>
+                            {{ $t->topic }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Duration (minutes)</label>
-            <input type="number" name="duration_minutes" value="{{ $quiz->duration_minutes }}" class="form-control">
-        </div>
+            <div class="mb-8">
+                <label class="form-label fw-bold">Quiz Name</label>
+                <input type="text" name="name" class="form-control form-control-solid"
+                       value="{{ $quiz->name }}">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Total Marks</label>
-            <input type="number" name="total_marks" value="{{ $quiz->total_marks }}" class="form-control">
-        </div>
+            <div class="mb-8">
+                <label class="form-label fw-bold">Duration (minutes)</label>
+                <input type="number" name="duration_minutes" class="form-control form-control-solid"
+                       value="{{ $quiz->duration_minutes }}">
+            </div>
 
-        <button class="btn btn-primary">Update Quiz</button>
-    </form>
+            <div class="mb-8">
+                <label class="form-label fw-bold">Total Marks</label>
+                <input type="number" name="total_marks" class="form-control form-control-solid"
+                       value="{{ $quiz->total_marks }}">
+            </div>
+
+            <button class="btn btn-primary mt-5">Update Quiz</button>
+        </form>
+
+    </div>
 </div>
 @endsection
