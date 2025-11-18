@@ -71,11 +71,14 @@ Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('
 
 
 
+// //    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
 //    Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
-   Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
-Route::post('/quizzes/store', [QuizController::class, 'store'])->name('quizzes.store');
-Route::post('/quizzes/update/{id}', [QuizController::class, 'update'])->name('quizzes.update');
-Route::get('/quizzes/delete/{id}', [QuizController::class, 'destroy'])->name('quizzes.delete');
+// Route::get('/quizzes/create', [QuizController::class, 'create'])->name('quizzes.create');
+// Route::post('/quizzes/store', [QuizController::class, 'store'])->name('quizzes.store');
+// Route::post('/quizzes/update/{id}', [QuizController::class, 'update'])->name('quizzes.update');
+// Route::get('/quizzes/delete/{id}', [QuizController::class, 'destroy'])->name('quizzes.delete');
 
 
-//
+
+// //
+Route::resource('quizzes', QuizController::class);

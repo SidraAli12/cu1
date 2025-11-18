@@ -6,6 +6,18 @@
 
     <form action="{{ route('quizzes.update', $quiz->id) }}" method="POST">
         @csrf
+        @method('PUT')
+
+        <div class="mb-3">
+            <label class="form-label">Select Topic</label>
+            <select name="topic_id" class="form-control">
+                @foreach ($topics as $t)
+                    <option value="{{ $t->id }}" {{ $quiz->topic_id == $t->id ? 'selected' : '' }}>
+                        {{ $t->topic }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
         <div class="mb-3">
             <label class="form-label">Quiz Name</label>

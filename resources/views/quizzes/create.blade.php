@@ -12,7 +12,7 @@
             <select name="topic_id" class="form-control">
                 <option value="">Select</option>
                 @foreach ($topics as $t)
-                    <option value="{{ $t->id }}">{{ $t->name }}</option>
+<option value="{{ $t->id }}">{{ $t->topic }}</option>
                 @endforeach
             </select>
         </div>
